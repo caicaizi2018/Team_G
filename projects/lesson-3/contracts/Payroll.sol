@@ -73,9 +73,9 @@ contract Payroll is Ownable{
         var employee = mapEmployees[addrOfEmployee];
         assert(employee.addrOfEmployee == 0x0); 
 
-        ntotalSalary = ntotalSalary.add(salary * 1 ether);
+        ntotalSalary = ntotalSalary.add(salary.mul(1 ether));
         
-        mapEmployees[addrOfEmployee]= struEmployee(addrOfEmployee,salary * 1 ether,now) ;
+        mapEmployees[addrOfEmployee]= struEmployee(addrOfEmployee,salary.mul(1 ether),now) ;
         
         nEmployeeNum = nEmployeeNum.add(1);
         
@@ -104,7 +104,7 @@ contract Payroll is Ownable{
         ntotalSalary = ntotalSalary.sub(employee.salary);
         
         partialPaid(employee);
-        employee.salary = salary * 1 ether;
+        employee.salary = salary.mul(1 ether);
         employee.lastPayday = now;
         
         ntotalSalary = ntotalSalary.add(employee.salary);
@@ -156,3 +156,4 @@ contract Payroll is Ownable{
         employee.lastPayday = nextPayday;
         employee.addrOfEmployee.transfer(employee.salary);
     }
+}
